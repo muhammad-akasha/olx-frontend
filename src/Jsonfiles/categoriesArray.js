@@ -1,0 +1,86 @@
+export const categories = [
+  {
+    src: "/mobiles.png",
+    alt: "mobile",
+    title: "Mobiles",
+    icon: "https://www.olx.com.pk/assets/mobiles_noinline.44a7c2eda1ddc22570789a0ccc594747.svg",
+  },
+  {
+    src: "/vehicles.png",
+    alt: "vehicles",
+    title: "Vehicles",
+    icon: "https://www.olx.com.pk/assets/vehicles_noinline.6dc597b67b2291206d31e2a68f8a24af.svg",
+  },
+  {
+    src: "/property.png",
+    alt: "property",
+    title: "Property for Sales",
+    icon: "https://www.olx.com.pk/assets/property-for-sale_noinline.c018c0d0282f22a3c31bb0c42f3c60d7.svg",
+  },
+  {
+    src: "/property-for-rent.png",
+    alt: "property for rent",
+    title: "Property for Rent",
+    icon: "https://www.olx.com.pk/assets/property-for-rent_noinline.864cf34b8ee4401929a10d17b20e04fe.svg",
+  },
+  {
+    src: "/electronics-home-appliances.png",
+    alt: "electronics and appliances",
+    title: "Electronics and Home Appliances",
+    icon: "https://www.olx.com.pk/assets/business_noinline.0435ec0dc583161da4ab51295bd797d9.svg",
+  },
+  {
+    src: "/bikes.png",
+    alt: "bikes",
+    title: "Bikes",
+    icon: "https://www.olx.com.pk/assets/bikes_noinline.3fd0a90292fe3789fbb152331b6b98d7.svg",
+  },
+  {
+    src: "/business-industrial-agriculture.png",
+    alt: "business and industrial",
+    title: "Business, Industrial & Agriculture",
+    icon: "https://www.olx.com.pk/assets/business_noinline.0435ec0dc583161da4ab51295bd797d9.svg",
+  },
+  {
+    src: "/services.png",
+    alt: "services",
+    title: "Services",
+    icon: "https://www.olx.com.pk/assets/services_noinline.45ae56797ea7fef0d10caa5a9781e582.svg",
+  },
+  {
+    src: "/jobs.png",
+    alt: "jobs",
+    title: "Jobs",
+    icon: "https://www.olx.com.pk/assets/jobs_noinline.d6f4dade8cdc874401969e2bd6318078.svg",
+  },
+  {
+    src: "/animals.png",
+    alt: "animals",
+    title: "Animals",
+    icon: "https://www.olx.com.pk/assets/animals_noinline.d46a492a3e40e6af1e9182d449f29d54.svg",
+  },
+  {
+    src: "/furniture-home-decor.png",
+    alt: "furniture and home decor",
+    title: "Furniture & Home Decor",
+    icon: "https://www.olx.com.pk/assets/furniture_noinline.a5d6d061d6abaf3312be92b3e986fe70.svg",
+  },
+  {
+    src: "/fashion-beauty.png",
+    alt: "fashion and beauty",
+    title: "Fashion & Beauty",
+    icon: "https://www.olx.com.pk/assets/fashion_noinline.bfcd59a02f93e5266557005afbef528d.svg",
+  },
+  {
+    src: "/books-sports-hobbies.png",
+    alt: "books and hobbies",
+    title: "Books, Sports & Hobbies",
+    icon: "https://www.olx.com.pk/assets/books_noinline.76258f31282677c284caceacd09c324d.svg",
+  },
+  {
+    src: "/kids.png",
+    alt: "kids",
+    title: "Kids",
+    icon: "https://www.olx.com.pk/assets/kids_noinline.f2c727c099e56c33fb79733597068140.svg",
+  },
+];
