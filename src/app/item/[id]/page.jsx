@@ -27,7 +27,7 @@ const Item = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/getadbyid/?id=${id}`
+        `https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/getadbyid/?id=${id}`
       );
       setAd(res.data.ad);
     } catch (error) {
@@ -62,8 +62,8 @@ const Item = () => {
     <>
       {ad ? (
         <>
-          <div className="flex gap-4 mt-10 mx-8">
-            <div className="carousel w-[67%]">
+          <div className="flex flex-wrap justify-center gap-4 mt-10 mx-2 lg:mx-8">
+            <div className="carousel w-full md:w-[67%]">
               {ad.images.map((image, index) => (
                 <div
                   key={index}
@@ -74,7 +74,7 @@ const Item = () => {
                   <img
                     src={image}
                     alt={`Slide ${index + 1}`}
-                    className="object-contain"
+                    className="md:object-contain object-cover w-[100%]"
                   />
                   <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
                     <button

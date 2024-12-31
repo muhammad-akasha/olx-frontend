@@ -4,8 +4,11 @@ import React, { useEffect, useState } from "react";
 import SearchedCard from "./SearchedCard";
 import Link from "next/link";
 import Skeliton from "./Skeliton";
+import { useAuthenticate } from "../Contexts/UserContext";
+import Protect from "./Protect";
 
 const UserAd = () => {
+  const { isLogin } = useAuthenticate();
   const [myads, setMyads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,9 +32,14 @@ const UserAd = () => {
   };
 
   useEffect(() => {
-    getMyAds();
+    if (isLogin) {
+      getMyAds();
+    }
   }, []);
 
+  if (!isLogin) {
+    return <Protect />;
+  }
   if (loading) {
     return (
       <div className="mt-5">

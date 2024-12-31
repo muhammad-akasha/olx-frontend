@@ -3,7 +3,7 @@ import React from "react";
 
 const TryMobileApp = () => {
   return (
-    <div className="pl-10 mt-8 bg-[#f7f8f9] grid grid-cols-3 gap-7 items-center">
+    <div className="p-2 lg:pl-10 mt-8 bg-[#f7f8f9] grid md:grid-cols-3 grid-cols-1 gap-7 pb-5 md:gap-3 lg:gap-7 items-center">
       <div>
         <Image
           src={"/olxMobileApp.webp"}

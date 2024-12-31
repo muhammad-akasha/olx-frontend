@@ -4,8 +4,11 @@ import PostingAdd from "../../../components/PostingAdd";
 import { useCategory } from "../../../Contexts/CategoryContext";
 import { useRouter } from "next/navigation"; // Correct import for navigation
 import React, { useEffect, useState } from "react";
+import { useAuthenticate } from "../../../Contexts/UserContext";
+import Protect from "../../../components/Protect";
 
 const CreateAdd = () => {
+  const { isLogin } = useAuthenticate();
   const { categoryDetail } = useCategory();
   const router = useRouter(); // Use Next.js router for navigation
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +20,10 @@ const CreateAdd = () => {
     }
     console.log(categoryDetail);
   }, [categoryDetail, router]);
+
+  if (!isLogin) {
+    return <Protect />;
+  }
 
   // Show the loader and prevent rendering when redirecting
   if (isLoading) {

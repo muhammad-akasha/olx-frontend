@@ -6,7 +6,10 @@ import { externalCategory } from "../../Jsonfiles/externalCategoryArray";
 import { useCategory } from "../../Contexts/CategoryContext";
 import Link from "next/link";
 import { categories } from "../../Jsonfiles/categoriesArray.js";
+import { useAuthenticate } from "../../Contexts/UserContext";
+import Protect from "../../components/Protect";
 const AddPost = () => {
+  const { isLogin } = useAuthenticate();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedNestedCategory, setSelectedNestedCategory] = useState("");
   const { categoryDetail, setCategoryDetail } = useCategory();
@@ -17,6 +20,10 @@ const AddPost = () => {
     setSelectedCategory(item.title);
     setSelectedNestedCategory(""); // Reset nested category on change
   };
+
+  if (!isLogin) {
+    return <Protect />;
+  }
 
   return (
     <div>
@@ -31,7 +38,7 @@ const AddPost = () => {
 
       {/* If no category is selected, show the category options */}
       {!selectedCategory ? (
-        <div className="grid grid-cols-3 mx-auto gap-3 items-center text-center w-full max-w-screen-xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-3 items-center text-center w-full max-w-screen-xl">
           {categories.map((item, index) => (
             <div
               key={index}
@@ -44,7 +51,7 @@ const AddPost = () => {
         </div>
       ) : (
         // When a category is selected, show nested categories
-        <div className="grid grid-cols-3 justify-center mx-auto gap-0 border-[1px] border-[#002F345C] rounded-md mt-2 items-start text-center w-full max-w-screen-xl mb-5 h-full">
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 justify-center mx-auto gap-0 border-[1px] border-[#002F345C] rounded-md mt-2 items-start text-center w-full max-w-screen-xl mb-5 h-full">
           <div className="flex-1 border-r-[1px] border-solid border-[#002F345C] h-full">
             {/* Display category options with highlighting */}
             {categories.map((item, index) => (
@@ -114,7 +121,7 @@ const AddPost = () => {
           externalCategory[0][categoryDetail.title].options[
             selectedNestedCategory
           ] ? (
-            <div className="flex-1 h-full">
+            <div className="flex-1 h-full border-r-[1px] border-[#002F345C]">
               {externalCategory[0][selectedCategory].options[
                 selectedNestedCategory
               ].map((item, index) => (

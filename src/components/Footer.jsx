@@ -11,8 +11,8 @@ const Footer = () => {
     <>
       {homeNav ? (
         <footer>
-          <div className="bg-[#ebeeef] border-t border-[rgba(0,47,52,0.2)] pt-3 pb-6 ">
-            <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="bg-[#ebeeef] border-t p-4 sm-p-0 border-[rgba(0,47,52,0.2)] pt-3 pb-6">
+            <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
               {/* Popular Categories */}
               <div>
                 <h3 className="font-bold text-lg mb-4">Popular Categories</h3>
@@ -213,7 +213,7 @@ const Footer = () => {
                     src={"/iconTwitter.svg"}
                   />
                 </div>
-                <div className="mt-5 flex gap-1">
+                <div className="mt-5 flex gap-1 lg:flex-wrap">
                   <Image
                     src={"/iconAppGallery.svg"}
                     width={84}

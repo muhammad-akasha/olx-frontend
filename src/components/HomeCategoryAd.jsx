@@ -54,7 +54,7 @@ const HomeCategoryAd = () => {
         Object.keys(ads).map((category) => (
           <div key={category}>
             <h2 className="font-semibold text-2xl mt-6 mb-3">{category}</h2>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="grid grid-cols-1 justify-center sm:justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {ads[category].map((item) => (
                 <div key={item._id}>
                   <Link href={`/item/${item._id}`}>

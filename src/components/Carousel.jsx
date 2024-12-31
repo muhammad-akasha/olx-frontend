@@ -6,7 +6,7 @@ const Carousel = () => {
 
   const slides = [
     {
-      link: "https://www.olx.com.pk/myads?utm_source=CLM-OLX&utm_medium=house-ads&utm_campaign=feature-ad",
+      link: "https://www.olx.com.pk",
       imgSrc: "/carousel-image.jpeg",
       alt: "Feature Your Ad & Reach Up To 20x More Buyers!",
     },
@@ -27,7 +27,10 @@ const Carousel = () => {
   };
 
   return (
-    <div className="carousel-container m-10" style={{ position: "relative" }}>
+    <div
+      className="carousel-container m-2 md:m-5 lg:m-10  h-[100px] sm:h-[150px]"
+      style={{ position: "relative" }}
+    >
       <div
         className="carousel-wrapper"
         style={{ display: "flex", overflow: "hidden" }}
@@ -53,7 +56,12 @@ const Carousel = () => {
                 src={slide.imgSrc}
                 alt={slide.alt}
                 className="carousel-image"
-                style={{ width: "100%" }}
+                style={{
+                  width: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  height: "100%",
+                }}
               />
             </a>
           </div>

@@ -1,10 +1,9 @@
-import Image from "next/image";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa";
 
 const Cards = ({ price, title, timeSincePosted, location, image }) => {
   return (
-    <div className="border-[0.1rem] border-solid border-[rgba(0,47,52,0.2)] rounded-[0.4rem] cursor-pointer overflow-hidden relative select-none w-[302px] h-[314px] bg-white">
+    <div className="border-[0.1rem] border-solid border-[rgba(0,47,52,0.2)] rounded-[0.4rem] cursor-pointer overflow-hidden relative select-none h-[314px] bg-white">
       <div className="w-full h-[50%]">
         <img
           src={image[0] || `/iphone.webp`}

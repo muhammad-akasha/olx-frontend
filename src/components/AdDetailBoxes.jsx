@@ -10,7 +10,7 @@ const AdDetailBoxes = ({
   condition,
 }) => {
   return (
-    <div className="w-[64%] mx-8">
+    <div className="w-full lg:w-[64%] px-2 lg:mx-8">
       <div className="p-3 h-fit border-2 border-[#ebe6e6] mt-4">
         <h2 className="text-4xl font-semibold">Rs {price || `77,000`} </h2>
         <h4 className="font-semibold mt-4 text-lg">

@@ -33,13 +33,20 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true); // Loading state
   const [hide, show] = useState(false);
 
-  const getUser = () => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      setIsLogin(JSON.parse(user));
-      setLoading(false);
-      // return;
+  const refreshToken = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/refreshtoken",
+        {},
+        { withCredentials: true }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  const getUser = () => {
     setLoading(true);
     axios
       .post(
@@ -51,12 +58,21 @@ const Navbar = () => {
         console.log(res);
         setIsLogin(res.data.user);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          // Access token is expired, refresh it
+          console.log("Access token expired. Trying to refresh...");
+          refreshToken();
+        }
+        console.log(err);
+        setIsLogin("");
+      })
       .finally(() => {
         setLoading(false);
       });
   };
   useEffect(() => {
+    refreshToken();
     if (showNavbar) {
       setHomeNav(false);
     } else {
@@ -83,8 +99,6 @@ const Navbar = () => {
       )
       .then((res) => {
         console.log(res);
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("user");
         setIsLogin("");
       })
       .catch((err) => console.log(err));
@@ -92,8 +106,8 @@ const Navbar = () => {
 
   return !showNavbar ? (
     <>
-      <header className="px-8 py-[14px] bg-white sticky top-0 z-20">
-        <div className="flex gap-10 items-center">
+      <header className="px-1 md:px-8 py-[14px] bg-white sticky top-0 z-20">
+        <div className="flex gap-2 md:gap-4 lg:gap-10 items-center">
           <div>
             <Link href={"/"}>
               <Logo />
@@ -103,16 +117,16 @@ const Navbar = () => {
             <div className="bg-custom-gradient p-2 rounded-full">
               <Car />
             </div>
-            <h3 className="font-semibold">Motors</h3>
+            <h3 className="font-semibold cursor-pointer">Motors</h3>
           </div>
           <div className="flex gap-3 items-center">
             <div className="bg-custom-gradient p-2 rounded-full">
               <Floor />
             </div>
-            <h3 className="font-semibold">Property</h3>
+            <h3 className="font-semibold cursor-pointer">Property</h3>
           </div>
         </div>
-        <div className="mt-6 flex gap-4 items-center">
+        <div className="mt-6 flex gap-4 items-center flex-wrap">
           <LocationDropdown />
           <div className="flex-1">
             <SearchInp />
@@ -157,11 +171,13 @@ const Navbar = () => {
                         <h2 className="font-semibold">{isLogin.fullName}</h2>
                       </div>
                     </div>
-                    <div className="border-2 border-black hover:border-4 h-[2.2rem] flex justify-center items-center mt-4 mb-2 rounded-md">
-                      <button className="btn btn-ghost hover:outline-none hover:bg-transparent">
-                        View and edit your profile
-                      </button>
-                    </div>
+                    <Link href={"/editprofile"}>
+                      <div className="border-2 border-black hover:border-4 h-[2.2rem] flex justify-center items-center mt-4 mb-2 rounded-md">
+                        <button className="btn btn-ghost hover:outline-none hover:bg-transparent">
+                          View and edit your profile
+                        </button>
+                      </div>
+                    </Link>
                   </div>
                   <div className="border-t-2 border-[#ced6d7] p-4">
                     <Link href="/myads">

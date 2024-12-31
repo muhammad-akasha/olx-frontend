@@ -8,15 +8,17 @@ import Link from "next/link";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
 import formatDateDifferenceWithNow from "./DateCompareFunc";
-import NotFound from "./NotFound";
+import Loading from "./Loading";
 
 // Ensure that this component is only rendered client-side
 const SearchedItems = () => {
   const params = useSearchParams();
   const { data, setData } = useSearched();
   const [hide, show] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const search = async () => {
+    setLoading(true);
     const inputSearch = params.get("q");
     console.log(inputSearch);
     try {
@@ -33,18 +35,22 @@ const SearchedItems = () => {
         setData(createdAt);
       } else {
         setData("");
-        console.log("hello");
       }
     } catch (error) {
-      console.log("hello");
       console.log(error);
       setData("");
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     search();
   }, [params.get("q")]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="px-8 my-10">
@@ -68,8 +74,8 @@ const SearchedItems = () => {
         </div>
       </div>
       <div
-        className={`flex ${
-          !hide ? "flex-col" : "flex-row justify-center flex-wrap gap-4"
+        className={`flex flex-col ${
+          hide && "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4"
         } gap-2`}
       >
         {data.length > 0 ? (
@@ -86,9 +92,7 @@ const SearchedItems = () => {
             </Link>
           ))
         ) : (
-          <div>
-            <NotFound />
-          </div>
+          <h2 className="text-center h-[100px]">NO AD FOUND!</h2>
         )}
       </div>
     </div>

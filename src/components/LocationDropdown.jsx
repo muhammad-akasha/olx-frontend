@@ -24,7 +24,7 @@ const LocationDropdown = () => {
   };
 
   return (
-    <div className="relative inline-block text-left w-80">
+    <div className="relative inline-block text-left w-40 md:w-50 lg:w-80">
       {/* Selected option with arrow */}
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}

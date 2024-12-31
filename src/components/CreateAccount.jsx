@@ -29,20 +29,26 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
     formData.append("profilePicture", profilePicture[0]);
 
     axios
-      .post("http://localhost:5000/api/v1/register", formData, {
-        "Content-Type": "multipart/form-data",
-      })
+      .post(
+        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/register",
+        formData,
+        {
+          "Content-Type": "multipart/form-data",
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           axios
-            .post("http://localhost:5000/api/v1/login", {
-              email,
-              password,
-            })
+            .post(
+              "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/login",
+              {
+                email,
+                password,
+              }
+            )
             .then((res) => {
               console.log(res);
               setIsLogin(res.data.data);
-              localStorage.setItem("user", JSON.stringify(res.data.data));
               setIsOpenModal(false);
               setIsOpenCreateAccount(false);
               // localStorage.setItem("refreshToken", res.data.refreshToken);

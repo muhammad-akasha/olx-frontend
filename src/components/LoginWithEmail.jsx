@@ -34,8 +34,6 @@ const LoginWithEmail = ({ setIsOpenLogin, setIsOpenCreateAccount }) => {
       .then((res) => {
         console.log(res);
         setIsLogin(res.data.data);
-        localStorage.setItem("user", JSON.stringify(res.data.data));
-        // localStorage.setItem("refreshToken", res.data.refreshToken);
         setIsOpenModal(false);
         setIsOpenCreateAccount(false);
       })

@@ -39,9 +39,13 @@ const PostingAdd = () => {
     });
     setSubmitting(true);
     axios
-      .post("http://localhost:5000/api/v1/addolxad", adData, {
-        withCredentials: true,
-      })
+      .post(
+        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/addolxad",
+        adData,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         console.log(res);
       })
@@ -53,17 +57,6 @@ const PostingAdd = () => {
         router.push("/myads");
       });
   };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/check-token", { withCredentials: true }) // Ensure cookies are sent
-      .then((response) => {
-        console.log(response.data); // If the token exists, the response will be sent back
-      })
-      .catch((error) => {
-        console.log(error.response?.data); // If no token is found, this will show the error message
-      });
-  }, []);
 
   return (
     <>
