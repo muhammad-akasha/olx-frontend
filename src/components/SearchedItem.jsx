@@ -22,7 +22,7 @@ const SearchedItems = () => {
     const inputSearch = params.get("q");
     console.log(inputSearch);
     try {
-      const res = await axios.post(`http://localhost:5000/api/v1/getbysearch`, {
+      const res = await axios.post(`https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/getbysearch`, {
         inputSearch,
       });
       if (res.data.response.length > 0) {

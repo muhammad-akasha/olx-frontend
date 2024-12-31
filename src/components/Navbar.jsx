@@ -36,7 +36,7 @@ const Navbar = () => {
   const refreshToken = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/refreshtoken",
+        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/refreshtoken",
         {},
         { withCredentials: true }
       );
@@ -50,7 +50,7 @@ const Navbar = () => {
     setLoading(true);
     axios
       .post(
-        "http://localhost:5000/api/v1/getuser",
+        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/getuser",
         {},
         { withCredentials: true }
       )
@@ -93,7 +93,7 @@ const Navbar = () => {
   const logout = () => {
     axios
       .post(
-        "http://localhost:5000/api/v1/logout",
+        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/logout",
         {},
         { withCredentials: true }
       )

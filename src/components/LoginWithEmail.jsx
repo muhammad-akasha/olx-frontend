@@ -24,7 +24,7 @@ const LoginWithEmail = ({ setIsOpenLogin, setIsOpenCreateAccount }) => {
     const { email, password } = data;
     axios
       .post(
-        "http://localhost:5000/api/v1/login",
+        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/login",
         {
           email,
           password,
