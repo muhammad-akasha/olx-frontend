@@ -159,6 +159,7 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
               Profile Picture
             </label>
             <input
+              accept="image/png, image/gif, image/jpeg"
               id="profilePicture"
               type="file"
               {...register("profilePicture", {

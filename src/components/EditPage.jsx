@@ -32,7 +32,7 @@ const EditPage = () => {
         "http://localhost:8000/api/v1/updateuser",
         formData
       );
-      console.log(res.data.user);
+      console.log(res.data);
       setIsLogin(res.data.user);
       Swal.fire({
         title: "Profile Updated!",
@@ -76,7 +76,10 @@ const EditPage = () => {
             { id: isLogin._id },
             { withCredentials: true }
           )
-          .then((res) => console.log(res))
+          .then((res) => {
+            console.log(res);
+            setIsLogin("");
+          })
           .catch((err) => console.log(err));
         Swal.fire({
           title: "Deleted!",
@@ -118,7 +121,7 @@ const EditPage = () => {
                     <input
                       className="opacity-0 w-full h-full absolute top-0"
                       type="file"
-                      accept="image/*"
+                      accept="image/png, image/gif, image/jpeg"
                       name="profile"
                       id="profile"
                       onChange={handleImage}

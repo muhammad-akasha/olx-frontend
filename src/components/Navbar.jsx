@@ -72,7 +72,6 @@ const Navbar = () => {
       });
   };
   useEffect(() => {
-    refreshToken();
     if (showNavbar) {
       setHomeNav(false);
     } else {

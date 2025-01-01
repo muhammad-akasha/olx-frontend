@@ -46,7 +46,7 @@ const UploadImages = () => {
           {/* File input should only cover the upload button */}
           <input
             type="file"
-            accept="image/*"
+            accept="image/png, image/gif, image/jpeg"
             multiple
             onChange={handleImageChange}
             required
