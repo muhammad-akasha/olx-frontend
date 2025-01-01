@@ -39,9 +39,13 @@ const PostingAdd = () => {
     });
     setSubmitting(true);
     axios
-      .post("http://localhost:8000/api/v1/addolxad", adData, {
-        withCredentials: true,
-      })
+      .post(
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/addolxad",
+        adData,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         console.log(res);
       })

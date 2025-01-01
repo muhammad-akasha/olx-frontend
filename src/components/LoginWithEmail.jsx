@@ -24,7 +24,7 @@ const LoginWithEmail = ({ setIsOpenLogin, setIsOpenCreateAccount }) => {
     const { email, password } = data;
     axios
       .post(
-        "http://localhost:8000/api/v1/login",
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/login",
         {
           email,
           password,
