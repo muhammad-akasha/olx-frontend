@@ -24,7 +24,7 @@ const LoginWithEmail = ({ setIsOpenLogin, setIsOpenCreateAccount }) => {
     const { email, password } = data;
     axios
       .post(
-        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/login",
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/login",
         {
           email,
           password,

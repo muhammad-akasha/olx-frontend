@@ -40,7 +40,7 @@ const PostingAdd = () => {
     setSubmitting(true);
     axios
       .post(
-        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/addolxad",
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/addolxad",
         adData,
         {
           withCredentials: true,

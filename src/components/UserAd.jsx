@@ -18,7 +18,7 @@ const UserAd = () => {
     setError(null);
     try {
       const res = await axios.post(
-        `https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/getads`,
+        `https://parallel-anglerfish-akasha-6ad22695.koyeb.app/getads`,
         {},
         { withCredentials: true }
       );

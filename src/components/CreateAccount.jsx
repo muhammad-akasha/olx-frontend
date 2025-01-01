@@ -30,7 +30,7 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
 
     axios
       .post(
-        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/register",
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/register",
         formData,
         {
           "Content-Type": "multipart/form-data",
@@ -40,7 +40,7 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
         if (res.status === 200) {
           axios
             .post(
-              "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/login",
+              "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/login",
               {
                 email,
                 password,

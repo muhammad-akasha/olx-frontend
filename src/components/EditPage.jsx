@@ -29,7 +29,7 @@ const EditPage = () => {
     }
     try {
       const res = await axios.post(
-        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/updateuser",
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/updateuser",
         formData
       );
       console.log(res.data.user);
@@ -72,7 +72,7 @@ const EditPage = () => {
       if (result.isConfirmed) {
         axios
           .post(
-            "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/deleteaccount",
+            "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/deleteaccount",
             { id: isLogin._id },
             { withCredentials: true }
           )

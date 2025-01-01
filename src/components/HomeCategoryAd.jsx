@@ -12,10 +12,13 @@ const HomeCategoryAd = () => {
       const categoryArr = ["Mobiles", "Vehicles", "Bikes"];
       const responses = await Promise.all(
         categoryArr.map((category) => {
-          return axios.post("https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/getcategory", {
-            category,
-            limit: 4,
-          });
+          return axios.post(
+            "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/getcategory",
+            {
+              category,
+              limit: 4,
+            }
+          );
         })
       );
       // Combine all ads into a single array

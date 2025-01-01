@@ -27,7 +27,7 @@ const Item = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/getadbyid/?id=${id}`
+        `koyeb.app/api/v1/getadbyid/?id=${id}`
       );
       setAd(res.data.ad);
     } catch (error) {

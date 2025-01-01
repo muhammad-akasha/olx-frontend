@@ -36,7 +36,7 @@ const Navbar = () => {
   const refreshToken = async () => {
     try {
       const res = await axios.post(
-        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/refreshtoken",
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/refreshtoken",
         {},
         { withCredentials: true }
       );
@@ -50,7 +50,7 @@ const Navbar = () => {
     setLoading(true);
     axios
       .post(
-        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/getuser",
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/getuser",
         {},
         { withCredentials: true }
       )
@@ -93,7 +93,7 @@ const Navbar = () => {
   const logout = () => {
     axios
       .post(
-        "https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/logout",
+        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/logout",
         {},
         { withCredentials: true }
       )

@@ -47,7 +47,7 @@ const SearchInp = () => {
       setInputVal(val);
       try {
         const response = await axios.post(
-          `https://geographical-britte-akasha-08aa17f3.koyeb.app/api/v1/getbysearch`,
+          `https://parallel-anglerfish-akasha-6ad22695.koyeb.app/getbysearch`,
           {
             inputSearch: val,
           }
