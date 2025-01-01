@@ -18,7 +18,7 @@ const UserAd = () => {
     setError(null);
     try {
       const res = await axios.post(
-        `https://parallel-anglerfish-akasha-6ad22695.koyeb.app/getads`,
+        `http://localhost:8000/api/v1/getads`,
         {},
         { withCredentials: true }
       );

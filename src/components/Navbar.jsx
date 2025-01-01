@@ -36,7 +36,7 @@ const Navbar = () => {
   const refreshToken = async () => {
     try {
       const res = await axios.post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/refreshtoken",
+        "http://localhost:8000/api/v1/refreshtoken",
         {},
         { withCredentials: true }
       );
@@ -50,7 +50,7 @@ const Navbar = () => {
     setLoading(true);
     axios
       .post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/getuser",
+        "http://localhost:8000/api/v1/getuser",
         {},
         { withCredentials: true }
       )
@@ -93,7 +93,7 @@ const Navbar = () => {
   const logout = () => {
     axios
       .post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/logout",
+        "http://localhost:8000/api/v1/logout",
         {},
         { withCredentials: true }
       )

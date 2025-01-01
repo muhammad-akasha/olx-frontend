@@ -29,7 +29,7 @@ const EditPage = () => {
     }
     try {
       const res = await axios.post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/updateuser",
+        "http://localhost:8000/api/v1/updateuser",
         formData
       );
       console.log(res.data.user);
@@ -72,7 +72,7 @@ const EditPage = () => {
       if (result.isConfirmed) {
         axios
           .post(
-            "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/deleteaccount",
+            "http://localhost:8000/api/v1/deleteaccount",
             { id: isLogin._id },
             { withCredentials: true }
           )
