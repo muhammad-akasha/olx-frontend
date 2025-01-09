@@ -29,23 +29,16 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
     formData.append("profilePicture", profilePicture[0]);
 
     axios
-      .post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/register",
-        formData,
-        {
-          "Content-Type": "multipart/form-data",
-        }
-      )
+      .post("http://localhost:8000/api/v1/register", formData, {
+        "Content-Type": "multipart/form-data",
+      })
       .then((res) => {
         if (res.status === 200) {
           axios
-            .post(
-              "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/login",
-              {
-                email,
-                password,
-              }
-            )
+            .post("http://localhost:8000/api/v1/login", {
+              email,
+              password,
+            })
             .then((res) => {
               console.log(res);
               setIsLogin(res.data.data);

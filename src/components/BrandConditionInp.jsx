@@ -11,8 +11,8 @@ const BrandCondition = () => {
   return (
     <div className="border-b-2 border-solid border-gray p-5">
       {/* Brand Input */}
-      <div className="flex p-3">
-        <div className="w-[30%]">
+      <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-3">
+        <div className="w-full md:w-[30%]">
           <h3 className={`${errors.brand ? "text-red-500" : ""}`}>Brand*</h3>
         </div>
         <div className="flex-1">
@@ -41,8 +41,8 @@ const BrandCondition = () => {
       </div>
 
       {/* Condition Input */}
-      <div className="flex p-3">
-        <div className="w-[30%]">
+      <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-3">
+        <div className="w-full md:w-[30%]">
           <h3 className={`${errors.condition ? "text-red-500" : ""}`}>
             Condition*
           </h3>

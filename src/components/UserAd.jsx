@@ -6,6 +6,7 @@ import Link from "next/link";
 import Skeliton from "./Skeliton";
 import { useAuthenticate } from "../Contexts/UserContext";
 import Protect from "./Protect";
+import api from "../axios-api-intersectors/api";
 
 const UserAd = () => {
   const { isLogin } = useAuthenticate();
@@ -17,11 +18,7 @@ const UserAd = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.post(
-        `https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/getads`,
-        {},
-        { withCredentials: true }
-      );
+      const res = await api.post(`getads`, {});
       setMyads(res.data.data);
     } catch (error) {
       setError("Failed to fetch advertisements. Please try again later.");
@@ -58,16 +55,20 @@ const UserAd = () => {
 
   return (
     <div className="flex flex-col gap-2 my-2">
-      {myads.map((item) => (
-        <Link href={`/item/${item._id}`} key={item._id}>
+      {myads.map((item, index) => (
+        <div key={item._id}>
           <SearchedCard
+            index={index}
+            id={item._id}
             adTitle={item.adTitle}
             price={item.price}
             location={item.location}
             images={item.images}
             hide={false}
+            myads={myads}
+            setMyads={setMyads}
           />
-        </Link>
+        </div>
       ))}
     </div>
   );

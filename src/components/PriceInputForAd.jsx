@@ -8,9 +8,9 @@ const Price = () => {
   } = useFormContext();
 
   return (
-    <div className="flex p-6 border-2 border-solid border-gray-300 h-32 rounded-md">
+    <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-6 border-2 border-solid border-gray-300 h h-fit md:h-32 rounded-md">
       {/* Label */}
-      <div className="w-[30%]">
+      <div className="w-full md:w-[30%]">
         <h3 className={`${errors.price ? "text-red-500" : ""}`}>Price*</h3>
       </div>
 

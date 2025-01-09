@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useSearched } from "../Contexts/SearchItemContext";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import axios from "axios";
 import SearchedCard from "../components/SearchedCard";
-import Link from "next/link";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
 import formatDateDifferenceWithNow from "./DateCompareFunc";
@@ -12,6 +11,7 @@ import Loading from "./Loading";
 
 // Ensure that this component is only rendered client-side
 const SearchedItems = () => {
+  const router = useRouter();
   const params = useSearchParams();
   const { data, setData } = useSearched();
   const [hide, show] = useState(false);
@@ -22,12 +22,9 @@ const SearchedItems = () => {
     const inputSearch = params.get("q");
     console.log(inputSearch);
     try {
-      const res = await axios.post(
-        `https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/getbysearch`,
-        {
-          inputSearch,
-        }
-      );
+      const res = await axios.post(`http://localhost:8000/api/v1/getbysearch`, {
+        inputSearch,
+      });
       if (res.data.response.length > 0) {
         const createdAt = res.data.response.map((item) => {
           return {
@@ -83,8 +80,9 @@ const SearchedItems = () => {
       >
         {data.length > 0 ? (
           data.map((item) => (
-            <Link key={item._id} href={`/item/${item._id}`}>
+            <div key={item._id}>
               <SearchedCard
+                id={item._id}
                 adTitle={item.adTitle}
                 images={item.images}
                 price={item.price}
@@ -92,7 +90,7 @@ const SearchedItems = () => {
                 hide={hide}
                 diff={item.diff}
               />
-            </Link>
+            </div>
           ))
         ) : (
           <h2 className="text-center h-[100px]">NO AD FOUND!</h2>

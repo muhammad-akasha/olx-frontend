@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { categories } from "../Jsonfiles/categoriesArray";
+import { categories } from "../categoriesarrays/categoriesArray";
 
 const Categories = () => {
   return (

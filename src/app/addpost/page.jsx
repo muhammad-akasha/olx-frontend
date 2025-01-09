@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import CategoryBox from "../../components/CategoryBox";
 import SelectCategoryBox from "../../components/SelectCategoryBox";
-import { externalCategory } from "../../Jsonfiles/externalCategoryArray";
+import { externalCategory } from "../../categoriesarrays/externalCategoryArray";
 import { useCategory } from "../../Contexts/CategoryContext";
 import Link from "next/link";
-import { categories } from "../../Jsonfiles/categoriesArray.js";
+import { categories } from "../../categoriesarrays/categoriesArray.js";
 import { useAuthenticate } from "../../Contexts/UserContext";
 import Protect from "../../components/Protect";
 const AddPost = () => {

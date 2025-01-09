@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoSearch } from "react-icons/io5";
 import { useFormContext } from "react-hook-form";
 
@@ -11,8 +11,8 @@ const TitleDescription = () => {
   return (
     <div className="border-b-2 border-solid border-gray p-5">
       {/* Ad Title Input */}
-      <div className="flex p-3">
-        <div className="w-[30%]">
+      <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-3">
+        <div className="w-full md:w-[30%]">
           <h3 className={`${errors.title ? "text-red-500" : ""}`}>Ad Title*</h3>
         </div>
         <div className="flex-1">
@@ -38,8 +38,8 @@ const TitleDescription = () => {
       </div>
 
       {/* Description Input */}
-      <div className="flex p-3">
-        <div className="w-[30%]">
+      <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-3">
+        <div className="w-full md:w-[30%]">
           <h3 className={`${errors.description ? "text-red-500" : ""}`}>
             Description*
           </h3>
@@ -70,8 +70,8 @@ const TitleDescription = () => {
       </div>
 
       {/* Location Input */}
-      <div className="flex p-3">
-        <div className="w-[30%]">
+      <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-3">
+        <div className="w-full md:w-[30%]">
           <h3 className={`${errors.location ? "text-red-500" : ""}`}>
             Location*
           </h3>

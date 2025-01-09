@@ -6,7 +6,7 @@ const Category = () => {
   const { categoryDetail } = useCategory();
 
   return (
-    <section className="flex p-6 justify-between border-b-2 border-solid border-gray">
+    <section className="flex flex-col gap-8 md:flex-row md:gap-0  p-6 justify-between border-b-2 border-solid border-gray">
       <div>
         <strong>Category</strong>
       </div>

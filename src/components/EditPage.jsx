@@ -29,7 +29,7 @@ const EditPage = () => {
     }
     try {
       const res = await axios.post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/updateuser",
+        "http://localhost:8000/api/v1/updateuser",
         formData
       );
       console.log(res.data);
@@ -71,8 +71,8 @@ const EditPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post(
-            "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/deleteaccount",
+          .delete(
+            "http://localhost:8000/api/v1/deleteaccount",
             { id: isLogin._id },
             { withCredentials: true }
           )
@@ -196,7 +196,7 @@ const EditPage = () => {
             Are you sure you want to delete your account?
           </h5>
 
-          <div className="w-full lg:w-[30%] border-2 border-black hover:border-4 h-[2.7rem] flex justify-center items-center mt-4 mb-2 rounded-md">
+          <div className="w-full lg:w-full md:w-[30%] border-2 border-black hover:border-4 h-[2.7rem] flex justify-center items-center mt-4 mb-2 rounded-md">
             <button
               onClick={deleteMyAccount}
               className="btn btn-ghost hover:outline-none hover:bg-transparent text-[16px]"

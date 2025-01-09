@@ -47,7 +47,7 @@ const SearchInp = () => {
       setInputVal(val);
       try {
         const response = await axios.post(
-          `https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/getbysearch`,
+          `http://localhost:8000/api/v1/getbysearch`,
           {
             inputSearch: val,
           }

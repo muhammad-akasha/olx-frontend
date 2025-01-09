@@ -20,6 +20,8 @@ import { useAuthenticate } from "../Contexts/UserContext";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { CiMemoPad } from "react-icons/ci";
+import api, { refreshToken } from "../axios-api-intersectors/api";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const { setIsOpenModal } = useModal();
@@ -33,36 +35,25 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true); // Loading state
   const [hide, show] = useState(false);
 
-  const refreshToken = async () => {
-    try {
-      const res = await axios.post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/refreshtoken",
-        {},
-        { withCredentials: true }
-      );
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const getUser = () => {
     setLoading(true);
-    axios
-      .post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/getuser",
-        {},
-        { withCredentials: true }
-      )
+    api
+      .post("getuser", {})
       .then((res) => {
         console.log(res);
         setIsLogin(res.data.user);
       })
-      .catch((err) => {
+      .catch(async (err) => {
         if (err.response && err.response.status === 401) {
-          // Access token is expired, refresh it
+          // 401 means the access token is expired, try refreshing the token
           console.log("Access token expired. Trying to refresh...");
-          refreshToken();
+          try {
+            await refreshToken();
+            const res = await api.post("getuser", {});
+            setIsLogin(res.data.user);
+          } catch (error) {
+            console.log(error);
+          }
         }
         console.log(err);
         setIsLogin("");
@@ -89,15 +80,17 @@ const Navbar = () => {
       setIsOpenModal(true);
     }
   };
+
   const logout = () => {
     axios
       .post(
-        "https://parallel-anglerfish-akasha-6ad22695.koyeb.app/api/v1/logout",
+        "http://localhost:8000/api/v1/logout",
         {},
         { withCredentials: true }
       )
       .then((res) => {
         console.log(res);
+        Cookies.remove("accessToken");
         setIsLogin("");
       })
       .catch((err) => console.log(err));

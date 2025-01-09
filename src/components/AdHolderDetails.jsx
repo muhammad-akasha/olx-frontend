@@ -10,8 +10,8 @@ const AdHolderDetails = () => {
   return (
     <div className="p-5">
       {/* Name Input */}
-      <div className="flex p-3">
-        <div className="w-[30%]">
+      <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-3">
+        <div className="w-full md:w-full md:w-[30%]">
           <h3 className={`${errors.name ? "text-red-500" : ""}`}>Name*</h3>
         </div>
         <div className="flex-1">
@@ -39,8 +39,8 @@ const AdHolderDetails = () => {
       </div>
 
       {/* Mobile Phone Input */}
-      <div className="flex p-3">
-        <div className="w-[30%]">
+      <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-3">
+        <div className="w-full  md:w-[30%]">
           <h3 className={`${errors.phone ? "text-red-500" : ""}`}>
             Mobile Phone Number*
           </h3>
@@ -81,8 +81,8 @@ const AdHolderDetails = () => {
       </div>
 
       {/* Show Phone Number Checkbox */}
-      <div className="flex p-3">
-        <div className="w-[30%]">
+      <div className="flex items-center p-3">
+        <div className="w-full md:w-[30%]">
           <h3>Show My Phone Number in Ad*</h3>
         </div>
         <div className="flex flex-1 items-center justify-end h-14 w-full">

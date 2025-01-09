@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { TbCameraPlus } from "react-icons/tb";
 import { useFormContext } from "react-hook-form"; // Use form context and controller
 import { RxCross2 } from "react-icons/rx";
 
-const UploadImages = () => {
+const UploadImages = ({ oldImages }) => {
   const { setValue, watch } = useFormContext(); // Get methods from form context
   const [images, setImages] = useState(watch("images") || []); // Retrieve images from form state
+
+  useEffect(() => {
+    if (oldImages) {
+      setImages([...oldImages]);
+    }
+  }, [oldImages]);
 
   // Handle image selection
   const handleImageChange = (e) => {
@@ -37,11 +43,11 @@ const UploadImages = () => {
   };
 
   return (
-    <section className="flex justify-between p-5 border-b-2 border-gray">
+    <section className="flex flex-col gap-8 md:flex-row md:gap-0 justify-between p-5 border-b-2 border-gray">
       <div>
         <h3 className="font-semibold text-lg">Upload Images</h3>
       </div>
-      <div className="flex relative flex-col w-[70%] z-10">
+      <div className="flex relative flex-col w-full md:w-[70%] z-10">
         <div className="flex flex-wrap">
           {/* File input should only cover the upload button */}
           <input
@@ -49,7 +55,7 @@ const UploadImages = () => {
             accept="image/png, image/gif, image/jpeg"
             multiple
             onChange={handleImageChange}
-            required
+            required={images.length <= 0}
             className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
           />
           {/* Add image upload button with file input */}
@@ -69,7 +75,11 @@ const UploadImages = () => {
                   className="absolute top-[0.1rem] right-[0.1rem] hover:bg-white hover:text-black"
                 />
                 <img
-                  src={URL.createObjectURL(image)}
+                  src={
+                    typeof image === "string"
+                      ? image
+                      : URL.createObjectURL(image)
+                  }
                   alt={`Uploaded ${index + 1}`}
                   className="w-full h-full object-cover rounded-md"
                 />
