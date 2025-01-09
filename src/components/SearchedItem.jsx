@@ -22,9 +22,12 @@ const SearchedItems = () => {
     const inputSearch = params.get("q");
     console.log(inputSearch);
     try {
-      const res = await axios.post(`http://localhost:8000/api/v1/getbysearch`, {
-        inputSearch,
-      });
+      const res = await axios.post(
+        `https://olx-backend-deploy.vercel.app/api/v1/getbysearch`,
+        {
+          inputSearch,
+        }
+      );
       if (res.data.response.length > 0) {
         const createdAt = res.data.response.map((item) => {
           return {

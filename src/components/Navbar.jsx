@@ -84,7 +84,7 @@ const Navbar = () => {
   const logout = () => {
     axios
       .post(
-        "http://localhost:8000/api/v1/logout",
+        "https://olx-backend-deploy.vercel.app/api/v1/logout",
         {},
         { withCredentials: true }
       )

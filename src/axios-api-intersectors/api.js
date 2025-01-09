@@ -15,7 +15,7 @@ export const saveAccessToken = (accessToken) => {
 };
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api/v1/", // Your API URL
+  baseURL: "https://olx-backend-deploy.vercel.app/api/v1/", // Your API URL
   withCredentials: true,
 });
 
