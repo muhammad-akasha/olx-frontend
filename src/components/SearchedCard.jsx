@@ -28,12 +28,9 @@ const SearchedCard = (item) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(
-            `https://olx-backend-deploy.vercel.app/api/v1/deleteAd/${item.id}`,
-            {
-              withCredentials: true,
-            }
-          )
+          .delete(`http://localhost:8000/api/v1/deleteAd/${item.id}`, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res);
             myads.splice(index, 1);

@@ -30,7 +30,7 @@ const EditPage = () => {
     }
     try {
       const res = await axios.post(
-        "https://olx-backend-deploy.vercel.app/api/v1/updateuser",
+        "http://localhost:8000/api/v1/updateuser",
         formData
       );
       console.log(res.data);
@@ -72,21 +72,20 @@ const EditPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(
-            "https://olx-backend-deploy.vercel.app/api/v1/deleteaccount",
-            { id: isLogin._id },
-            { withCredentials: true }
-          )
+          .delete("http://localhost:8000/api/v1/deleteaccount", {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res);
             setIsLogin("");
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Account has been deleted.",
+              icon: "success",
+            });
+            router.push("/");
           })
           .catch((err) => console.log(err));
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
       }
     });
   };
