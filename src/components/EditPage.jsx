@@ -18,6 +18,7 @@ const EditPage = () => {
   const updateProfile = async (data) => {
     setSubmiting(true);
     const { name, email, contact, image } = data;
+    console.log(name, email, contact, image, isLogin._id);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -110,6 +111,7 @@ const EditPage = () => {
                   className="w-20 h-20 rounded-full"
                   src={
                     (image && URL.createObjectURL(image)) ||
+                    isLogin.profilePicture ||
                     `/iconProfilePicture.png`
                   }
                   alt="profiledummy"

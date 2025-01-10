@@ -5,8 +5,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
-import Cookies from "js-cookie";
-import { saveAccessToken } from "../axios-api-intersectors/api";
 
 const LoginWithEmail = ({ setIsOpenLogin, setIsOpenCreateAccount }) => {
   const { setIsOpenModal } = useModal();
@@ -38,7 +36,6 @@ const LoginWithEmail = ({ setIsOpenLogin, setIsOpenCreateAccount }) => {
         setIsLogin(res.data.data);
         setIsOpenModal(false);
         setIsOpenCreateAccount(false);
-        saveAccessToken(res.data.accessToken);
       })
       .catch((err) => {
         setErr(err.response.data.message);

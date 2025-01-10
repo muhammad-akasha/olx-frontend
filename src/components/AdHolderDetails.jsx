@@ -11,7 +11,7 @@ const AdHolderDetails = () => {
     <div className="p-5">
       {/* Name Input */}
       <div className="flex flex-col gap-6 md:flex-row md:gap-0 p-3">
-        <div className="w-full md:w-full md:w-[30%]">
+        <div className="w-full md:w-[30%]">
           <h3 className={`${errors.name ? "text-red-500" : ""}`}>Name*</h3>
         </div>
         <div className="flex-1">

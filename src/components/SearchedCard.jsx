@@ -1,21 +1,20 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { MdOutlinePhone } from "react-icons/md";
 import { FaRocketchat } from "react-icons/fa";
 import Cards from "./Cards";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { FaRegEdit } from "react-icons/fa";
 import Link from "next/link";
-import api from "../axios-api-intersectors/api";
 import Swal from "sweetalert2";
+import { useUserAds } from "../Contexts/UserPublishedAdsContext";
+import axios from "axios";
 
 const SearchedCard = (item) => {
+  const { myads, setMyads } = useUserAds();
   const pathname = usePathname();
-  const router = useRouter();
 
   const deleteAd = async () => {
-    const myads = item.myads;
-    const setMyAds = item.setMyads;
     const index = item.index;
 
     Swal.fire({
@@ -29,9 +28,14 @@ const SearchedCard = (item) => {
     }).then((result) => {
       if (result.isConfirmed) {
         myads.splice(index, 1);
-        setMyAds([...myads]);
-        api
-          .delete(`deleteAd/${item.id}`)
+        setMyads([...myads]);
+        axios
+          .delete(
+            `https://olx-backend-deploy.vercel.app/api/v1/deleteAd/${item.id}`,
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             console.log(res);
           })
@@ -61,7 +65,7 @@ const SearchedCard = (item) => {
         <div className="border-[0.1rem] border-solid border-[rgba(0,47,52,0.2)] rounded-[0.4rem] cursor-pointer overflow-hidden relative select-none gap-2 bg-white">
           <Link href={`item/${item.id}`}>
             <div className="w-full h-52 flex">
-              <div className="w-full md:w-[30%]">
+              <div className="w-fit md:w-[30%]">
                 <img
                   className="w-full h-full object-cover"
                   src={item.images[0]}
@@ -93,8 +97,8 @@ const SearchedCard = (item) => {
 
           {pathname.includes("/myads") && (
             <>
-              <Link href={`/editadd/${item.id}`} passHref>
-                <button className="btn  w-30 m-3 text-[17px]">
+              <Link href={`/editadd/${item.id}`}>
+                <button className="btn w-30 m-3 text-[17px]">
                   <FaRegEdit fontSize={22} /> Edit Ad
                 </button>
               </Link>

@@ -10,6 +10,7 @@ import NotFound from "../../../components/NotFound";
 import axios from "axios";
 import AdDetailBoxes from "../../../components/AdDetailBoxes.jsx";
 import Loading from "../../../components/Loading";
+import { useSingleAd } from "../../../Contexts/SingleAdContext";
 
 const Item = () => {
   function formatToMonthYear(dateString) {
@@ -20,7 +21,7 @@ const Item = () => {
   }
 
   const { id } = useParams();
-  const [ad, setAd] = useState(null);
+  const { ad, setAd } = useSingleAd();
   const [loading, setLoading] = useState(true);
 
   const getAdByID = async (id) => {

@@ -2,7 +2,7 @@ import Logo from "../svg-components/Logo";
 import React from "react";
 import { IoMdArrowBack } from "react-icons/io";
 
-const AddNav = () => {
+const AdsNav = () => {
   const handleBack = () => {
     window.history.back();
   };
@@ -23,4 +23,4 @@ const AddNav = () => {
   );
 };
 
-export default AddNav;
+export default AdsNav;

@@ -3,7 +3,7 @@ import UserAd from "../../components/UserAd";
 
 const MyAds = () => {
   return (
-    <div className="px-8 my-5">
+    <div className="px-2 md:px-8 my-5">
       <h2 className="font-semibold text-xl">MY ADS</h2>
       <UserAd />
     </div>

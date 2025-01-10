@@ -8,6 +8,9 @@ import { CategoryProvider } from "../Contexts/CategoryContext.jsx";
 import Navbar from "../components/Navbar";
 import { SearchProvider } from "../Contexts/SearchItemContext";
 import AuthModal from "../components/AuthModal";
+import { HomeAdsProvider } from "../Contexts/HomeScreenAdContext";
+import { SingleAdProvider } from "../Contexts/SingleAdContext";
+import { UserAdsProvider } from "../Contexts/UserPublishedAdsContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,20 +34,26 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavProvider>
-          <CategoryProvider>
-            <LoginUserProvider>
-              <ModalProvider>
-                <SearchProvider>
-                  <AuthModal />
-                  <Navbar />
-                  {children}
-                  <Footer />
-                </SearchProvider>
-              </ModalProvider>
-            </LoginUserProvider>
-          </CategoryProvider>
-        </NavProvider>
+        <UserAdsProvider>
+          <SingleAdProvider>
+            <HomeAdsProvider>
+              <NavProvider>
+                <CategoryProvider>
+                  <LoginUserProvider>
+                    <ModalProvider>
+                      <SearchProvider>
+                        <AuthModal />
+                        <Navbar />
+                        {children}
+                        <Footer />
+                      </SearchProvider>
+                    </ModalProvider>
+                  </LoginUserProvider>
+                </CategoryProvider>
+              </NavProvider>
+            </HomeAdsProvider>
+          </SingleAdProvider>
+        </UserAdsProvider>
       </body>
     </html>
   );

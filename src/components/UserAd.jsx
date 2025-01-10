@@ -2,23 +2,26 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SearchedCard from "./SearchedCard";
-import Link from "next/link";
 import Skeliton from "./Skeliton";
 import { useAuthenticate } from "../Contexts/UserContext";
 import Protect from "./Protect";
-import api from "../axios-api-intersectors/api";
+import { useUserAds } from "../Contexts/UserPublishedAdsContext";
 
 const UserAd = () => {
   const { isLogin } = useAuthenticate();
-  const [myads, setMyads] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { myads, setMyads } = useUserAds();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const getMyAds = async () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api.post(`getads`, {});
+      const res = await axios.post(
+        `https://olx-backend-deploy.vercel.app/api/v1/getads`,
+        {},
+        { withCredentials: true }
+      );
       setMyads(res.data.data);
     } catch (error) {
       setError("Failed to fetch advertisements. Please try again later.");
@@ -29,7 +32,8 @@ const UserAd = () => {
   };
 
   useEffect(() => {
-    if (isLogin) {
+    if ((isLogin && !myads) || myads.length === 0) {
+      setLoading(true);
       getMyAds();
     }
   }, []);
@@ -50,7 +54,11 @@ const UserAd = () => {
   }
 
   if (myads.length === 0) {
-    return <div>No advertisements found.</div>;
+    return (
+      <div className="h-44 flex justify-center items-center">
+        No advertisements found....
+      </div>
+    );
   }
 
   return (
@@ -58,15 +66,13 @@ const UserAd = () => {
       {myads.map((item, index) => (
         <div key={item._id}>
           <SearchedCard
-            index={index}
             id={item._id}
+            index={index}
             adTitle={item.adTitle}
             price={item.price}
             location={item.location}
             images={item.images}
             hide={false}
-            myads={myads}
-            setMyads={setMyads}
           />
         </div>
       ))}

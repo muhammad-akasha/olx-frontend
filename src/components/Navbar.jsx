@@ -10,7 +10,7 @@ import { FaPlus } from "react-icons/fa";
 import SellFrame from "./SellBtnFrame";
 import LoginBtn from "./LoginBtn";
 import { useNav } from "../Contexts/NavbarContext";
-import AddNav from "./AddNav";
+import AdsNav from "./AdsNav";
 import SecondNav from "./SecondNav";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // New import
@@ -20,8 +20,6 @@ import { useAuthenticate } from "../Contexts/UserContext";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { CiMemoPad } from "react-icons/ci";
-import api, { refreshToken } from "../axios-api-intersectors/api";
-import Cookies from "js-cookie";
 
 const Navbar = () => {
   const { setIsOpenModal } = useModal();
@@ -37,19 +35,26 @@ const Navbar = () => {
 
   const getUser = () => {
     setLoading(true);
-    api
-      .post("getuser", {})
+    axios
+      .post(
+        "https://olx-backend-deploy.vercel.app/api/v1/getuser",
+        {},
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log(res);
         setIsLogin(res.data.user);
       })
       .catch(async (err) => {
-        if (err.response && err.response.status === 401) {
+        if (err.response) {
           // 401 means the access token is expired, try refreshing the token
           console.log("Access token expired. Trying to refresh...");
           try {
-            await refreshToken();
-            const res = await api.post("getuser", {});
+            const res = await axios.post(
+              "https://olx-backend-deploy.vercel.app/api/v1/getuser",
+              {},
+              { withCredentials: true }
+            );
             setIsLogin(res.data.user);
           } catch (error) {
             console.log(error);
@@ -90,7 +95,6 @@ const Navbar = () => {
       )
       .then((res) => {
         console.log(res);
-        Cookies.remove("accessToken");
         setIsLogin("");
       })
       .catch((err) => console.log(err));
@@ -208,7 +212,7 @@ const Navbar = () => {
       <SecondNav />
     </>
   ) : (
-    <AddNav />
+    <AdsNav />
   );
 };
 

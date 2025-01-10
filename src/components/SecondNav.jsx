@@ -2,8 +2,8 @@ import React from "react";
 
 const SecondNav = () => {
   return (
-    <header className="px-8 border-t-[1px] py-4 border-[#d8dfe0]">
-      <ul className="flex gap-4 text-sm flex-wrapcccc">
+    <header className="px-2 md:px-8 border-t-[1px] py-4 border-[#d8dfe0]">
+      <ul className="flex gap-4 text-sm flex-wrap">
         <li className="font-semibold text-md cursor-pointer">ALL CATEGORIES</li>
         <li className="cursor-pointer">Mobile Phones</li>
         <li className="cursor-pointer">Cars</li>

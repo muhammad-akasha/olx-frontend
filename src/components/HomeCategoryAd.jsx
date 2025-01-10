@@ -1,12 +1,13 @@
 "use client";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Cards from "./Cards";
 import Link from "next/link";
 import formatDateDifferenceWithNow from "./DateCompareFunc";
+import { useHomeAds } from "../Contexts/HomeScreenAdContext";
 
 const HomeCategoryAd = () => {
-  const [ads, setAds] = useState("");
+  const { ads, setAds } = useHomeAds();
   const getAdByCategory = async () => {
     try {
       const categoryArr = ["Mobiles", "Vehicles", "Bikes"];

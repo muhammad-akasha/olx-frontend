@@ -9,13 +9,14 @@ import Price from "./PriceInputForAd";
 import AdHolderDetails from "./AdHolderDetails";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
-import api from "../axios-api-intersectors/api";
+import { useUserAds } from "../Contexts/UserPublishedAdsContext";
 
 const PostingAdd = ({ beforeEdit }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { categoryDetail } = useCategory();
   const [submitting, setSubmitting] = useState(false);
+  const { myads, setMyads } = useUserAds();
 
   // Initialize React Hook Form
   const methods = useForm();
@@ -70,8 +71,24 @@ const PostingAdd = ({ beforeEdit }) => {
         beforeEdit ? `editadd/${beforeEdit._id}` : "addolxad"
       }`;
       const reqMethod = beforeEdit ? "put" : "post";
-      const response = await api[reqMethod](apiEndpoint, adData);
-      console.log(response); // Log response for debugging
+      const response = await axios[reqMethod](
+        `https://olx-backend-deploy.vercel.app/api/v1/${apiEndpoint}`,
+        adData,
+        { withCredentials: true }
+      );
+      if (beforeEdit) {
+        // Update the existing ad in the state (if editing)
+        setMyads((prev) =>
+          prev.map((ad) =>
+            ad._id === response.data.ad._id ? response.data.ad : ad
+          )
+        );
+      } else {
+        // Add the new ad to the state (if creating)
+        myads.unshift(response.data.ad);
+        setMyads([...myads]);
+      }
+
       router.push("/myads"); // Redirect after successful submission
     } catch (err) {
       console.log("Error:", err);

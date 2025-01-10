@@ -26,14 +26,20 @@ const Carousel = () => {
     setCurrentSlide(index);
   };
 
+  // Auto slide functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [slides.length]);
+
   return (
-    <div
-      className="carousel-container m-2 md:m-5 lg:m-10  h-[100px] sm:h-[150px]"
-      style={{ position: "relative" }}
-    >
+    <div className="carousel-container relative m-2 md:m-5 lg:m-10">
       <div
-        className="carousel-wrapper"
-        style={{ display: "flex", overflow: "hidden" }}
+        className="carousel-wrapper flex overflow-hidden h-40 md:h-48"
+        style={{ position: "relative", width: "100%", height: "fit" }}
       >
         {slides.map((slide, index) => (
           <div
@@ -42,8 +48,12 @@ const Carousel = () => {
             style={{
               width: "100%",
               flexShrink: 0,
-              overflow: "auto",
-              display: currentSlide === index ? "block" : "none",
+              overflow: "hidden",
+              position: "absolute",
+              top: "0",
+              left: "0",
+              opacity: currentSlide === index ? 1 : 0,
+              transition: "opacity 1s ease-in-out", // Smooth fade transition
             }}
           >
             <a
@@ -55,13 +65,7 @@ const Carousel = () => {
               <img
                 src={slide.imgSrc}
                 alt={slide.alt}
-                className="carousel-image"
-                style={{
-                  width: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  height: "100%",
-                }}
+                className="carousel-image w-full object-cover object-center h-[200px]"
               />
             </a>
           </div>
@@ -69,12 +73,9 @@ const Carousel = () => {
       </div>
 
       <div
-        className="carousel-buttons"
+        className="carousel-buttons absolute bottom-2 left-0 right-0 text-center"
         style={{
-          position: "absolute",
-          bottom: "10px",
-          width: "100%",
-          textAlign: "center",
+          zIndex: 10,
         }}
       >
         {slides.map((_, index) => (
@@ -84,9 +85,10 @@ const Carousel = () => {
             style={{
               background: currentSlide === index ? "#fff" : "#bbb",
               border: "none",
-              height: "2px",
+              height: "5px", // Adjusted for better visibility
               width: "20px",
               margin: "0 5px",
+              borderRadius: "10%",
             }}
           ></button>
         ))}
