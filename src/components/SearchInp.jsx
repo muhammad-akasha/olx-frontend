@@ -47,7 +47,7 @@ const SearchInp = () => {
       setInputVal(val);
       try {
         const response = await axios.post(
-          `http://localhost:8000/api/v1/getbysearch`,
+          `https://olx-backend-deploy.vercel.app/api/v1/getbysearch`,
           {
             inputSearch: val,
           }

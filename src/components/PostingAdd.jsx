@@ -72,7 +72,7 @@ const PostingAdd = ({ beforeEdit }) => {
       }`;
       const reqMethod = beforeEdit ? "put" : "post";
       const response = await axios[reqMethod](
-        `http://localhost:8000/api/v1/${apiEndpoint}`,
+        `https://olx-backend-deploy.vercel.app/api/v1/${apiEndpoint}`,
         adData,
         { withCredentials: true }
       );

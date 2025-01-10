@@ -24,7 +24,7 @@ const LoginWithEmail = ({ setIsOpenLogin, setIsOpenCreateAccount }) => {
     const { email, password } = data;
     axios
       .post(
-        "http://localhost:8000/api/v1/login",
+        "https://olx-backend-deploy.vercel.app/api/v1/login",
         {
           email,
           password,
