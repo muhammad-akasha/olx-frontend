@@ -11,10 +11,10 @@ const EditAd = () => {
   const { setCategoryDetail } = useCategory();
   const { id } = useParams();
 
-  const getAdByID = async (id) => {
+  const getAdByID = async () => {
     try {
       const res = await axios.post(
-        `https://olx-backend-deploy.vercel.app/api/v1//getadbyid/?id=${id}`
+        `https://olx-backend-deploy.vercel.app/api/v1/getadbyid/?id=${id}`
       );
       const categoryMatch = categories.find(
         (item) => item.title === res.data.ad.category
@@ -32,7 +32,7 @@ const EditAd = () => {
     }
   };
   useEffect(() => {
-    getAdByID(id);
+    getAdByID();
   }, [id]);
 
   return (
