@@ -27,8 +27,6 @@ const SearchedCard = (item) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        myads.splice(index, 1);
-        setMyads([...myads]);
         axios
           .delete(
             `https://olx-backend-deploy.vercel.app/api/v1/deleteAd/${item.id}`,
@@ -38,6 +36,8 @@ const SearchedCard = (item) => {
           )
           .then((res) => {
             console.log(res);
+            myads.splice(index, 1);
+            setMyads([...myads]);
           })
           .catch((err) => console.log(err))
           .finally(() => {
