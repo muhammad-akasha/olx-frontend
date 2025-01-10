@@ -29,17 +29,13 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
     formData.append("profilePicture", profilePicture[0]);
 
     axios
-      .post(
-        "https://olx-backend-deploy.vercel.app/api/v1//register",
-        formData,
-        {
-          "Content-Type": "multipart/form-data",
-        }
-      )
+      .post("https://olx-backend-deploy.vercel.app/api/v1/register", formData, {
+        "Content-Type": "multipart/form-data",
+      })
       .then((res) => {
         if (res.status === 200) {
           axios
-            .post("https://olx-backend-deploy.vercel.app/api/v1//login", {
+            .post("https://olx-backend-deploy.vercel.app/api/v1/login", {
               email,
               password,
             })
@@ -48,7 +44,6 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
               setIsLogin(res.data.data);
               setIsOpenModal(false);
               setIsOpenCreateAccount(false);
-              // localStorage.setItem("refreshToken", res.data.refreshToken);
             })
             .catch((err) => setErr(err.response.data.message))
             .finally(() => setLoading(false));
