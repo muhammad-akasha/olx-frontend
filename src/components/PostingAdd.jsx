@@ -85,8 +85,7 @@ const PostingAdd = ({ beforeEdit }) => {
         );
       } else {
         // Add the new ad to the state (if creating)
-        myads.unshift(response.data.ad);
-        setMyads([...myads]);
+        setMyads((prev) => [response.data.ad, ...prev]); // Create a new array with the new ad at the beginning
       }
 
       router.push("/myads"); // Redirect after successful submission
