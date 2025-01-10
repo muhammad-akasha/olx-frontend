@@ -30,7 +30,7 @@ const EditPage = () => {
     }
     try {
       const res = await axios.post(
-        "https://olx-backend-deploy.vercel.app/api/v1/updateuser",
+        "http://localhost:8000/api/v1/updateuser",
         formData
       );
       console.log(res.data);
@@ -73,7 +73,7 @@ const EditPage = () => {
       if (result.isConfirmed) {
         axios
           .delete(
-            "https://olx-backend-deploy.vercel.app/api/v1/deleteaccount",
+            "http://localhost:8000/api/v1/deleteaccount",
             { id: isLogin._id },
             { withCredentials: true }
           )

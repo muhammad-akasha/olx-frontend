@@ -29,17 +29,13 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
     formData.append("profilePicture", profilePicture[0]);
 
     axios
-      .post(
-        "https://olx-backend-deploy.vercel.app/api/v1//register",
-        formData,
-        {
-          "Content-Type": "multipart/form-data",
-        }
-      )
+      .post("http://localhost:8000/api/v1//register", formData, {
+        "Content-Type": "multipart/form-data",
+      })
       .then((res) => {
         if (res.status === 200) {
           axios
-            .post("https://olx-backend-deploy.vercel.app/api/v1//login", {
+            .post("http://localhost:8000/api/v1//login", {
               email,
               password,
             })
