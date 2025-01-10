@@ -18,7 +18,7 @@ const UserAd = () => {
     setError(null);
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/getads",
+        "https://olx-backend-deploy.vercel.app/api/v1/getads",
         {},
         {
           withCredentials: true, // Make sure this is set
