@@ -31,7 +31,8 @@ const EditPage = () => {
     try {
       const res = await axios.post(
         "https://olx-backend-deploy.vercel.app/api/v1/updateuser",
-        formData
+        formData,
+        { withCredentials: true }
       );
       console.log(res.data);
       setIsLogin(res.data.user);
