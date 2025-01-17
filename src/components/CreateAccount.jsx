@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { imageToUrl } from "../firebase/firebaseconfig.js";
+import { imageToUrl } from "../firebase/firebaseconfig.ts";
 
 const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
   const { setIsOpenModal } = useModal();

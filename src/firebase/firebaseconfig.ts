@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-const imageToUrl = async (image) => {
+const imageToUrl = async (image : any) => {
   try {
     // Create a reference to the location where you want to store the image
     const storageRef = ref(storage, `images/${image.name}`);

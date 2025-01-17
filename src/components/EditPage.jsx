@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useAuthenticate } from "../Contexts/UserContext";
 import Protect from "../components/Protect";
 import { useRouter } from "next/navigation";
-import { imageToUrl } from "../firebase/firebaseconfig";
+import { imageToUrl } from "../firebase/firebaseconfig.ts";
 
 const EditPage = () => {
   const router = useRouter();

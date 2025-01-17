@@ -10,7 +10,7 @@ import AdHolderDetails from "./AdHolderDetails";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import { useUserAds } from "../Contexts/UserPublishedAdsContext";
-import { imageToUrl } from "../firebase/firebaseconfig";
+import { imageToUrl } from "../firebase/firebaseconfig.ts";
 
 const PostingAdd = ({ beforeEdit }) => {
   const router = useRouter();

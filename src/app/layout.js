@@ -7,7 +7,7 @@ import { LoginUserProvider } from "../Contexts/UserContext.jsx";
 import { CategoryProvider } from "../Contexts/CategoryContext.jsx";
 import Navbar from "../components/Navbar";
 import { SearchProvider } from "../Contexts/SearchItemContext";
-import AuthModal from "../components/AuthModal";
+import AuthModal from "../components/AuthModal.jsx";
 import { HomeAdsProvider } from "../Contexts/HomeScreenAdContext";
 import { SingleAdProvider } from "../Contexts/SingleAdContext";
 import { UserAdsProvider } from "../Contexts/UserPublishedAdsContext";
