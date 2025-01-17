@@ -32,7 +32,7 @@ const EditPage = () => {
     }
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/updateuser",
+        "https://olx-nu-gilt.vercel.app/api/v1/updateuser",
         updatedData,
         { withCredentials: true }
       );
@@ -75,7 +75,7 @@ const EditPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete("http://localhost:8000/api/v1/deleteaccount", {
+          .delete("https://olx-nu-gilt.vercel.app/api/v1/deleteaccount", {
             withCredentials: true,
           })
           .then((res) => {
