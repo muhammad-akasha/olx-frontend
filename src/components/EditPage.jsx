@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useAuthenticate } from "../Contexts/UserContext";
 import Protect from "../components/Protect";
 import { useRouter } from "next/navigation";
+import { imageToUrl } from "../firebase/firebaseconfig";
 
 const EditPage = () => {
   const router = useRouter();
@@ -19,19 +20,20 @@ const EditPage = () => {
     setSubmiting(true);
     const { name, email, contact, image } = data;
     console.log(name, email, contact, image, isLogin._id);
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("contact", contact);
-    formData.append("id", isLogin._id);
+    const updatedData = {};
+    updatedData.name = name;
+    updatedData.email = email;
+    updatedData.contact = contact;
+    updatedData.id = isLogin._id;
     console.log("image added", data);
     if (image) {
-      formData.append("profile", image);
+      const url = await imageToUrl(image);
+      updatedData.image = url;
     }
     try {
       const res = await axios.post(
-        "https://olx-backend-deploy.vercel.app/api/v1/updateuser",
-        formData,
+        "http://localhost:8000/api/v1/updateuser",
+        updatedData,
         { withCredentials: true }
       );
       console.log(res.data);
@@ -73,12 +75,9 @@ const EditPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(
-            "https://olx-backend-deploy.vercel.app/api/v1/deleteaccount",
-            {
-              withCredentials: true,
-            }
-          )
+          .delete("http://localhost:8000/api/v1/deleteaccount", {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res);
             setIsLogin("");

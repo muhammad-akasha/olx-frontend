@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { imageToUrl } from "../firebase/firebaseconfig.js";
 
 const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
   const { setIsOpenModal } = useModal();
@@ -19,23 +20,23 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
   } = useForm();
 
   // Handle form submission
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setLoading(true);
+    console.log(data);
     const { name, email, password, profilePicture } = data;
-    const formData = new FormData();
-    formData.append("fullName", name);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("profilePicture", profilePicture[0]);
+    const profileObj = {};
+    profileObj.fullName = name;
+    profileObj.email = email;
+    profileObj.password = password;
+    const url = await imageToUrl(profilePicture);
+    profileObj.image = url;
 
     axios
-      .post("https://olx-backend-deploy.vercel.app/api/v1/register", formData, {
-        "Content-Type": "multipart/form-data",
-      })
+      .post("http://localhost:8000/api/v1/register", profileObj)
       .then((res) => {
         if (res.status === 200) {
           axios
-            .post("https://olx-backend-deploy.vercel.app/api/v1/login", {
+            .post("http://localhost:8000/api/v1/login", {
               email,
               password,
             })

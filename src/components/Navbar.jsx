@@ -3,7 +3,7 @@
 import Car from "../svg-components/Car";
 import Floor from "../svg-components/Floor";
 import Logo from "../svg-components/Logo";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LocationDropdown from "./LocationDropdown";
 import SearchInp from "./SearchInp";
 import { FaPlus } from "react-icons/fa";
@@ -31,13 +31,14 @@ const Navbar = () => {
   const showNavbar = noRouteNav.includes(pathname);
   const { isLogin, setIsLogin } = useAuthenticate();
   const [loading, setLoading] = useState(true); // Loading state
-  const [hide, show] = useState(false);
+  const [hide, setHide] = useState(false);
+  const dropdownRef = useRef(null);
 
   const getUser = () => {
     setLoading(true);
     axios
       .post(
-        "https://olx-backend-deploy.vercel.app/api/v1/getuser",
+        "http://localhost:8000/api/v1/getuser",
         {},
         { withCredentials: true }
       )
@@ -51,7 +52,7 @@ const Navbar = () => {
           console.log("Access token expired. Trying to refresh...");
           try {
             const res = await axios.post(
-              "https://olx-backend-deploy.vercel.app/api/v1/getuser",
+              "http://localhost:8000/api/v1/getuser",
               {},
               { withCredentials: true }
             );
@@ -89,7 +90,7 @@ const Navbar = () => {
   const logout = () => {
     axios
       .post(
-        "https://olx-backend-deploy.vercel.app/api/v1/logout",
+        "http://localhost:8000/api/v1/logout",
         {},
         { withCredentials: true }
       )
@@ -99,6 +100,22 @@ const Navbar = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setHide(false); // Close the dropdown if click is outside of it
+    }
+  };
+
+  useEffect(() => {
+    // Adding event listener for clicks outside the dropdown
+    document.addEventListener("click", handleClickOutside);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return !showNavbar ? (
     <>
@@ -133,8 +150,9 @@ const Navbar = () => {
             <LoginBtn />
           ) : (
             <div
+              ref={dropdownRef}
               className="flex gap-1 items-center relative"
-              onClick={() => show(!hide)}
+              onClick={() => setHide(!hide)}
             >
               <img
                 className="rounded-full w-12 h-12"

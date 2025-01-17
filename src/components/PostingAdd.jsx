@@ -10,6 +10,7 @@ import AdHolderDetails from "./AdHolderDetails";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import { useUserAds } from "../Contexts/UserPublishedAdsContext";
+import { imageToUrl } from "../firebase/firebaseconfig";
 
 const PostingAdd = ({ beforeEdit }) => {
   const router = useRouter();
@@ -22,8 +23,10 @@ const PostingAdd = ({ beforeEdit }) => {
   const methods = useForm();
   useEffect(() => {
     if (beforeEdit) {
+      console.log(categoryDetail);
       // Check if methods is fully initialized
       if (methods.setValue) {
+        console.log(beforeEdit);
         methods.setValue("title", beforeEdit.adTitle);
         methods.setValue("description", beforeEdit.description);
         methods.setValue("location", beforeEdit.location);
@@ -32,7 +35,6 @@ const PostingAdd = ({ beforeEdit }) => {
         methods.setValue("phone", beforeEdit.phone);
         methods.setValue("category", beforeEdit.category);
         methods.setValue("price", beforeEdit.price);
-        methods.setValue("subCategory", beforeEdit.subCategory);
         methods.setValue("name", beforeEdit.name);
         methods.setValue("showPhoneNumber", beforeEdit.showPhoneNumber);
         methods.setValue("images", beforeEdit.images);
@@ -41,38 +43,41 @@ const PostingAdd = ({ beforeEdit }) => {
   }, [methods, beforeEdit]);
 
   const onSubmit = async (data) => {
-    const adData = new FormData();
+    const adData = {};
+    adData.oldUrl = [];
+    adData.images = []; // Initialize images as an empty array
     // Append the data to the FormData object
-    adData.append("name", data.name);
-    adData.append("adTitle", data.title);
-    adData.append("description", data.description);
-    adData.append("location", data.location);
-    adData.append("brand", data.brand);
-    adData.append("condition", data.condition);
-    adData.append("phone", data.phone);
-    adData.append("price", data.price);
-    adData.append("category", categoryDetail.title);
-    adData.append("subCategory", data.subCategory);
-    adData.append("showPhoneNumber", data.showPhoneNumber);
+    adData.name = data.name;
+    adData.adTitle = data.title;
+    adData.description = data.description;
+    adData.location = data.location;
+    adData.brand = data.brand;
+    adData.condition = data.condition;
+    adData.phone = data.phone;
+    adData.price = data.price;
+    adData.category = categoryDetail.title;
+    adData.subCategory = categoryDetail.category;
+    adData.showPhoneNumber = data.showPhoneNumber;
+    console.log(data);
 
-    // If you have an array of files for images, append each file (and URLs separately)
-    data.images.forEach((image) => {
-      if (typeof image === "string") {
-        // If the image is a URL (string), append it as a URL
-        adData.append("oldUrl", image);
-      } else if (image instanceof File) {
-        // If the image is a file object, append it as a file
-        adData.append("images", image);
-      }
-    });
     setSubmitting(true);
     try {
+      for (const image of data.images) {
+        if (typeof image === "string") {
+          adData.oldUrl.push(image); // If it's already a URL, push it to oldUrl
+        } else if (image instanceof File) {
+          // If it's a File, upload it to Firebase and get the URL
+          const url = await imageToUrl(image);
+          console.log(url);
+          adData.images.push(url); // Push the URL to the images array
+        }
+      }
       const apiEndpoint = `${
         beforeEdit ? `editadd/${beforeEdit._id}` : "addolxad"
       }`;
       const reqMethod = beforeEdit ? "put" : "post";
       const response = await axios[reqMethod](
-        `https://olx-backend-deploy.vercel.app/api/v1/${apiEndpoint}`,
+        `http://localhost:8000/api/v1/${apiEndpoint}`,
         adData,
         { withCredentials: true }
       );
