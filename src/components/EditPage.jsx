@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useAuthenticate } from "../Contexts/UserContext";
 import Protect from "../components/Protect";
 import { useRouter } from "next/navigation";
-import { imageToUrl } from "../firebase/firebaseconfig.ts";
+import { imageToUrl } from "../firebase/firebaseconfig.js";
 
 const EditPage = () => {
   const router = useRouter();
@@ -32,7 +32,7 @@ const EditPage = () => {
     }
     try {
       const res = await axios.post(
-        "https://olx-nu-gilt.vercel.app/api/v1/updateuser",
+        "http://localhost:8000/api/v1/updateuser",
         updatedData,
         { withCredentials: true }
       );
@@ -75,7 +75,7 @@ const EditPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete("https://olx-nu-gilt.vercel.app/api/v1/deleteaccount", {
+          .delete("http://localhost:8000/api/v1/deleteaccount", {
             withCredentials: true,
           })
           .then((res) => {

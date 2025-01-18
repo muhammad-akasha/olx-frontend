@@ -10,7 +10,7 @@ import AdHolderDetails from "./AdHolderDetails";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import { useUserAds } from "../Contexts/UserPublishedAdsContext";
-import { imageToUrl } from "../firebase/firebaseconfig.ts";
+import { imageToUrl } from "../firebase/firebaseconfig.js";
 
 const PostingAdd = ({ beforeEdit }) => {
   const router = useRouter();
@@ -77,7 +77,7 @@ const PostingAdd = ({ beforeEdit }) => {
       }`;
       const reqMethod = beforeEdit ? "put" : "post";
       const response = await axios[reqMethod](
-        `https://olx-nu-gilt.vercel.app/api/v1/${apiEndpoint}`,
+        `http://localhost:8000/api/v1/${apiEndpoint}`,
         adData,
         { withCredentials: true }
       );

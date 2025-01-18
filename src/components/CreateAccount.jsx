@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { imageToUrl } from "../firebase/firebaseconfig.ts";
+import { imageToUrl } from "../firebase/firebaseconfig.js";
 
 const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
   const { setIsOpenModal } = useModal();
@@ -32,11 +32,11 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
     profileObj.image = url;
 
     axios
-      .post("https://olx-nu-gilt.vercel.app/api/v1/register", profileObj)
+      .post("http://localhost:8000/api/v1/register", profileObj)
       .then((res) => {
         if (res.status === 200) {
           axios
-            .post("https://olx-nu-gilt.vercel.app/api/v1/login", {
+            .post("http://localhost:8000/api/v1/login", {
               email,
               password,
             })

@@ -28,7 +28,7 @@ const Item = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `https://olx-nu-gilt.vercel.app/api/v1/getadbyid/?id=${id}`
+        `http://localhost:8000/api/v1/getadbyid/?id=${id}`
       );
       setAd(res.data.ad);
     } catch (error) {
