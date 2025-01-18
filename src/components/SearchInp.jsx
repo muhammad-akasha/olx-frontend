@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoSearchOutline } from "react-icons/io5";
-import { useSearched } from "../Contexts/SearchItemContext";
+// import { useSearched } from "../Contexts/SearchItemContext";
 import { useRouter } from "next/navigation";
 
 const SearchInp = () => {
@@ -13,10 +13,27 @@ const SearchInp = () => {
     formState: { errors },
   } = useForm();
 
-  const { data, setData } = useSearched();
+  // const { data, setData } = useSearched();
   const [searchResult, setSearchResult] = useState([]);
   const [inputVal, setInputVal] = useState("");
   const [hideSearch, setHideSearch] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      setSelectedIndex((prevIndex) =>
+        Math.min(searchResult.length - 1, prevIndex + 1)
+      );
+    } else if (e.key === "ArrowUp") {
+      setSelectedIndex((prevIndex) => Math.max(0, prevIndex - 1));
+    } else if (e.key === "Enter") {
+      const result = searchResult[selectedIndex];
+      console.log(result);
+      setInputVal(result.adTitle);
+      router.push(`/searcheditem?q=${result.adTitle}`);
+      setHideSearch(true);
+    }
+  };
 
   const dropdownRef = useRef(null);
 
@@ -47,7 +64,7 @@ const SearchInp = () => {
       setInputVal(val);
       try {
         const response = await axios.post(
-          `http://localhost:8000/api/v1/getbysearch`,
+          `https://olx-backend-deploy.vercel.app/api/v1/getbysearch`,
           {
             inputSearch: val,
           }
@@ -57,13 +74,13 @@ const SearchInp = () => {
           setSearchResult(response.data.response);
         } else {
           console.log("No results found");
-          setSearchResult("");
+          setSearchResult([]);
         }
       } catch (error) {
         console.log(error);
       }
     } else {
-      setSearchResult("");
+      setSearchResult([]);
       setInputVal("");
       setHideSearch(false);
     }
@@ -82,7 +99,9 @@ const SearchInp = () => {
           type="text"
           {...register("search", { required: "please add input" })}
           placeholder="Find Cars, Mobile Phones and more..."
+          value={inputVal}
           onChange={(e) => searchInp(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <div className="p-[13px] rounded-r-md bg-black flex items-center justify-center">
           <button type="submit">
@@ -96,15 +115,20 @@ const SearchInp = () => {
           ref={dropdownRef}
           className="absolute bg-white w-full text-black shadow-md"
         >
-          {searchResult.map((item) => (
+          {searchResult.map((item, index) => (
             <Link
               onClick={() => {
                 setHideSearch(true);
+                setSelectedIndex(-1);
               }}
               key={item._id}
               href={`/searcheditem?q=${item.adTitle}`}
             >
-              <div className="cursor-pointer hover:bg-[#17fbef4d] w-full border-[0.1rem] p-4 border-[#ced6d7] border-soild">
+              <div
+                className={`cursor-pointer hover:bg-[#17fbef4d] w-full border-[0.1rem] p-4 border-[#ced6d7] ${
+                  selectedIndex === index ? "bg-[#17fbef4d]" : ""
+                } border-solid`}
+              >
                 <h3 className="text-sm">
                   <span className="font-semibold">{item.adTitle}</span> in{" "}
                   {item.category}

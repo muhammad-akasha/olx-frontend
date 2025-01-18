@@ -19,7 +19,6 @@ const EditPage = () => {
   const updateProfile = async (data) => {
     setSubmiting(true);
     const { name, email, contact, image } = data;
-    console.log(name, email, contact, image, isLogin._id);
     const updatedData = {};
     updatedData.name = name;
     updatedData.email = email;
@@ -32,7 +31,7 @@ const EditPage = () => {
     }
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/updateuser",
+        "https://olx-backend-deploy.vercel.app/api/v1/updateuser",
         updatedData,
         { withCredentials: true }
       );
@@ -75,9 +74,12 @@ const EditPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete("http://localhost:8000/api/v1/deleteaccount", {
-            withCredentials: true,
-          })
+          .delete(
+            "https://olx-backend-deploy.vercel.app/api/v1/deleteaccount",
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             console.log(res);
             setIsLogin("");

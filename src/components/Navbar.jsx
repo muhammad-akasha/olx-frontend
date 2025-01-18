@@ -38,7 +38,7 @@ const Navbar = () => {
     setLoading(true);
     axios
       .post(
-        "http://localhost:8000/api/v1/getuser",
+        "https://olx-backend-deploy.vercel.app/api/v1/getuser",
         {},
         { withCredentials: true }
       )
@@ -52,7 +52,7 @@ const Navbar = () => {
           console.log("Access token expired. Trying to refresh...");
           try {
             const res = await axios.post(
-              "http://localhost:8000/api/v1/getuser",
+              "https://olx-backend-deploy.vercel.app/api/v1/getuser",
               {},
               { withCredentials: true }
             );
@@ -90,7 +90,7 @@ const Navbar = () => {
   const logout = () => {
     axios
       .post(
-        "http://localhost:8000/api/v1/logout",
+        "https://olx-backend-deploy.vercel.app/api/v1/logout",
         {},
         { withCredentials: true }
       )

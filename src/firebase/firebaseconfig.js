@@ -26,8 +26,6 @@ const imageToUrl = async (image) => {
     // Get the URL of the uploaded image
     const url = await getDownloadURL(snapshot.ref);
 
-    // Return the image URL
-    console.log(url);
     return url;
   } catch (error) {
     console.error("Error uploading image:", error);

@@ -22,7 +22,6 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
   // Handle form submission
   const onSubmit = async (data) => {
     setLoading(true);
-    console.log(data);
     const { name, email, password, profilePicture } = data;
     const profileObj = {};
     profileObj.fullName = name;
@@ -32,11 +31,11 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
     profileObj.image = url;
 
     axios
-      .post("http://localhost:8000/api/v1/register", profileObj)
+      .post("https://olx-backend-deploy.vercel.app/api/v1/register", profileObj)
       .then((res) => {
         if (res.status === 200) {
           axios
-            .post("http://localhost:8000/api/v1/login", {
+            .post("https://olx-backend-deploy.vercel.app/api/v1/login", {
               email,
               password,
             })

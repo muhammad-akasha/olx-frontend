@@ -13,10 +13,13 @@ const HomeCategoryAd = () => {
       const categoryArr = ["Mobiles", "Vehicles", "Bikes"];
       const responses = await Promise.all(
         categoryArr.map((category) => {
-          return axios.post("http://localhost:8000/api/v1/getcategory", {
-            category,
-            limit: 4,
-          });
+          return axios.post(
+            "https://olx-backend-deploy.vercel.app/api/v1/getcategory",
+            {
+              category,
+              limit: 4,
+            }
+          );
         })
       );
       // Combine all ads into a single array

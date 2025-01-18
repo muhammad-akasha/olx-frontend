@@ -23,10 +23,8 @@ const PostingAdd = ({ beforeEdit }) => {
   const methods = useForm();
   useEffect(() => {
     if (beforeEdit) {
-      console.log(categoryDetail);
       // Check if methods is fully initialized
       if (methods.setValue) {
-        console.log(beforeEdit);
         methods.setValue("title", beforeEdit.adTitle);
         methods.setValue("description", beforeEdit.description);
         methods.setValue("location", beforeEdit.location);
@@ -68,7 +66,6 @@ const PostingAdd = ({ beforeEdit }) => {
         } else if (image instanceof File) {
           // If it's a File, upload it to Firebase and get the URL
           const url = await imageToUrl(image);
-          console.log(url);
           adData.images.push(url); // Push the URL to the images array
         }
       }
@@ -77,7 +74,7 @@ const PostingAdd = ({ beforeEdit }) => {
       }`;
       const reqMethod = beforeEdit ? "put" : "post";
       const response = await axios[reqMethod](
-        `http://localhost:8000/api/v1/${apiEndpoint}`,
+        `https://olx-backend-deploy.vercel.app/api/v1/${apiEndpoint}`,
         adData,
         { withCredentials: true }
       );

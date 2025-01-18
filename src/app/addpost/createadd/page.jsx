@@ -18,7 +18,6 @@ const CreateAdd = () => {
       setIsLoading(true); // Show the loading spinner
       router.replace("/addpost"); // Redirect to a different page
     }
-    console.log(categoryDetail);
   }, [categoryDetail, router]);
 
   if (!isLogin) {
