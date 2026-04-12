@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useAuthenticate } from "../Contexts/UserContext";
 import Protect from "../components/Protect";
 import { useRouter } from "next/navigation";
-import { imageToUrl } from "../firebase/firebaseconfig.js";
+import { uploadImageToCloudinary } from "../utils/cloudinary.js";
 
 const EditPage = () => {
   const router = useRouter();
@@ -26,7 +26,7 @@ const EditPage = () => {
     updatedData.id = isLogin._id;
     console.log("image added", data);
     if (image) {
-      const url = await imageToUrl(image);
+      const url = await uploadImageToCloudinary(image);
       updatedData.image = url;
     }
     try {

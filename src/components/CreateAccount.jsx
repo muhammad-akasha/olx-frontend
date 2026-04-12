@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { imageToUrl } from "../firebase/firebaseconfig.js";
+import { uploadImageToCloudinary } from "../utils/cloudinary.js";
 
 const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
   const { setIsOpenModal } = useModal();
@@ -27,7 +27,7 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
     profileObj.fullName = name;
     profileObj.email = email;
     profileObj.password = password;
-    const url = await imageToUrl(profilePicture);
+    const url = await uploadImageToCloudinary(profilePicture);
     profileObj.image = url;
 
     axios

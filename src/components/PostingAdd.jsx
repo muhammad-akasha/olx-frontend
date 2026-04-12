@@ -10,7 +10,7 @@ import AdHolderDetails from "./AdHolderDetails";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import { useUserAds } from "../Contexts/UserPublishedAdsContext";
-import { imageToUrl } from "../firebase/firebaseconfig.js";
+import { uploadImageToCloudinary } from "../utils/cloudinary.js";
 
 const PostingAdd = ({ beforeEdit }) => {
   const router = useRouter();
@@ -64,14 +64,13 @@ const PostingAdd = ({ beforeEdit }) => {
         if (typeof image === "string") {
           adData.oldUrl.push(image); // If it's already a URL, push it to oldUrl
         } else if (image instanceof File) {
-          // If it's a File, upload it to Firebase and get the URL
-          const url = await imageToUrl(image);
+          // If it's a File, upload it to Cloudinary and get the URL
+          const url = await uploadImageToCloudinary(image);
           adData.images.push(url); // Push the URL to the images array
         }
       }
-      const apiEndpoint = `${
-        beforeEdit ? `editadd/${beforeEdit._id}` : "addolxad"
-      }`;
+      const apiEndpoint = `${beforeEdit ? `editadd/${beforeEdit._id}` : "addolxad"
+        }`;
       const reqMethod = beforeEdit ? "put" : "post";
       const response = await axios[reqMethod](
         `https://olx-backend-deploy.vercel.app/api/v1/${apiEndpoint}`,
@@ -127,8 +126,8 @@ const PostingAdd = ({ beforeEdit }) => {
                         ? "Editing..."
                         : "Posting..."
                       : pathname.includes("/editadd")
-                      ? "Edit Now"
-                      : "Post Now"}
+                        ? "Edit Now"
+                        : "Post Now"}
                   </button>
                 </div>
               </div>
