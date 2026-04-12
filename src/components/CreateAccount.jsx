@@ -27,7 +27,7 @@ const CreateAccount = ({ setIsOpenCreateAccount, setIsLoginOpen }) => {
     profileObj.fullName = name;
     profileObj.email = email;
     profileObj.password = password;
-    const url = await uploadImageToCloudinary(profilePicture);
+    const url = await uploadImageToCloudinary(profilePicture[0]);
     profileObj.image = url;
 
     axios

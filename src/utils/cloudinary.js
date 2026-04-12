@@ -1,6 +1,9 @@
 export const uploadImageToCloudinary = async (file) => {
+  // If file is a FileList (e.g. from react-hook-form register), take the first file
+  const fileToUpload = file instanceof FileList ? file[0] : file;
+
   const data = new FormData();
-  data.append("file", file);
+  data.append("file", fileToUpload);
   data.append(
     "upload_preset",
     process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "olximages",
